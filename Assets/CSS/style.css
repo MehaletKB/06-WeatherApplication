@@ -1,11 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
 .jumbotron {
     background-image: url(../../Assets/Images/jumboback.jpg);
     background-size: cover;
     text-align: center;
-}
-
-form {
-    margin: 20px
 }
 
 .container{
@@ -13,6 +13,18 @@ form {
     flex-direction: column;
     margin: auto;
     align-items: center;
+}
+
+form {
+    margin: 20px;
+}
+
+img{
+    margin: auto;
+}
+
+ul {
+    list-style-type: none;
 }
 
 a {

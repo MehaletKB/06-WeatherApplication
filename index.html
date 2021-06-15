@@ -19,22 +19,25 @@
                 <form class= "search-form" id="search-form">
                     <label for="search-text">Enter Location</label>
                     <input class="search-text" id="search-text" type="text" placeholder="City">
-                    <button class="search-btn" id="search-btn"><i class="fas fa-search"></i></button>
+                    <button class="search-button"><i class="fas fa-search"></i></button>
                 </form>
                 
+                <div class="error"></div>
+
                 <div class="card" style="width: 40rem;">
-                    <h5 class="searched-location">Searched Location</h5>
+                    <h5 class="searched-location"></h5>
+                    <h6 class="searched-location-date"></h6>
 
-                    <img src="..." class="icon" alt="...">
+                    <img src= "./Assets/Images/White-Square.jpg" class="weather-icon" alt="weather icon" width="100">
 
-                    <h2 class="current-temp">85</h2>
+                    <h2 class="searched-location-temp"></h2>
 
-                    <p class="searched-weather-description">Weather description</p>
+                    <p class="searched-weather-description">Weather</p>
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Humidity</li>
-                        <li class="list-group-item">Wind Speed</li>
-                        <li class="list-group-item">UV index</li>
+                        <li id="searched-location-humidity">Humidity:</li>
+                        <li id="searched-location-wind">Wind Speed:</li>
+                        <li id="searched-location-uvIndex">UV index:</li>
                     </ul>
 
                     <a href="#" class="card-link">Save Location</a>
@@ -54,13 +57,18 @@
         </nav>
 
 
-        <section class ="daily-forecast" id="daily-forecast" role="redion">
+        <section class ="daily-forecast" id="daily-forecast" role="region">
             <h2 class="daily-forecast-title" id="daily-forecast-title">Forecast</h2>
             <div class="daily-forecast-content" id="daily-forecast-content"></div>
         </section> -->
     </main>
     
     <script src="./Assets/JS/script.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>     -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     
 </body>
