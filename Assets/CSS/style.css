@@ -1,0 +1,20 @@
+.jumbotron {
+    background-image: url(../../Assets/Images/jumboback.jpg);
+    background-size: cover;
+    text-align: center;
+}
+
+form {
+    margin: 20px
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+}
+
+a {
+    padding: 15px
+}
