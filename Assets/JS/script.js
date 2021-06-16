@@ -26,40 +26,42 @@ function getData(){
 
 function displayData(response){
     console.log(response);
-        var location = document.querySelector(".searched-location");
-        location.innerHTML = `${response.name}, ${response.sys.country}`;
 
-        var timeStamp = response.dt;
-        var dateTime = new Date(timeStamp * 1000);
-        var localDateTime = document.querySelector(".searched-location-date");
-        localDateTime.innerHTML = (dateTime.toUTCString())
+    var location = document.querySelector(".searched-location");
+    location.innerHTML = `${response.name}, ${response.sys.country}`;
 
-        var temp = document.querySelector(".searched-location-temp");
-        temp.innerHTML = `${Math.round(response.main.temp)}°`
+    var timeStamp = response.dt;
+    var dateTime = new Date(timeStamp * 1000);
+    var localDateTime = document.querySelector(".searched-location-date");
+    localDateTime.innerHTML = (dateTime.toUTCString())
 
-        var weatherIcon = document.querySelector(".weather-icon");
-        var weatherIconURL = "http://openweathermap.org/img/w/";
-        var weatherIconCode = response.weather[0].icon;
-        weatherIcon.src = weatherIconURL + weatherIconCode + ".png";
+    var temp = document.querySelector(".searched-location-temp");
+    temp.innerHTML = `${Math.round(response.main.temp)}°`
 
-        var description = document.querySelector(".searched-weather-description");
-        description.innerHTML = `${response.weather[0].description}`
+    var weatherIcon = document.querySelector(".weather-icon");
+    var weatherIconURL = "http://openweathermap.org/img/w/";
+    var weatherIconCode = response.weather[0].icon;
+    weatherIcon.src = weatherIconURL + weatherIconCode + ".png";
 
-        var humidity = document.querySelector("#searched-location-humidity");
-        humidity.innerHTML = `Humidity: ${response.main.humidity}%`
+    var description = document.querySelector(".searched-weather-description");
+    description.innerHTML = `${response.weather[0].description}`
 
-        var windSpeed = document.querySelector("#searched-location-wind");
-        windSpeed.innerHTML = `Wind Speed: ${response.wind.speed} MPH`
+    var humidity = document.querySelector("#searched-location-humidity");
+    humidity.innerHTML = `Humidity: ${response.main.humidity}%`
 
-        var longitude = response.coord.lon;
-        var latitude = response.coord.lat;
+    var windSpeed = document.querySelector("#searched-location-wind");
+    windSpeed.innerHTML = `Wind Speed: ${response.wind.speed} MPH`
 
-        fetch(`${api.BASE_URL}onecall?lat=${latitude}&lon=${longitude}&appid=${api.key}`)
+    var longitude = response.coord.lon;
+    var latitude = response.coord.lat;
+
+    fetch(`${api.BASE_URL}onecall?lat=${latitude}&lon=${longitude}&appid=${api.key}`)
         .then(function(response){
             return response.json();
         })
         .then(function(data){
             console.log(data)
+            
             var uvIndex = document.querySelector("#searched-location-uvIndex");
             uvIndex.innerHTML = `${data.current.uvi}`
             uvIndexInt = parseInt(uvIndex.innerHTML)
@@ -70,15 +72,15 @@ function displayData(response){
                 } else if(uvIndexInt > 3 && uvIndexInt < 7) {
                     $(".uv").removeClass("good")
                     $(".uv").addClass("moderate")
-                } else {
+                } else if (uvIndexInt > 7) {
                     $(".uv").removeClass("good")
                     $(".uv").removeClass("moderate")
                     $(".uv").addClass("bad")
                 }
             }
             changeUVStatus()
-        })
 
+        })
 
 
     }
