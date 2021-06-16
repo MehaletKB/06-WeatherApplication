@@ -63,9 +63,22 @@ function displayData(response){
             var uvIndex = document.querySelector("#searched-location-uvIndex");
             uvIndex.innerHTML = `${data.current.uvi}`
             uvIndexInt = parseInt(uvIndex.innerHTML)
-            if(uvIndexInt > 3){
-                $("#searched-location-uvIndex").addClass("good")
+
+            function changeUVStatus() {
+                if(uvIndexInt < 3){
+                    $(".uv").addClass("good")
+                } else if(uvIndexInt > 3 && uvIndexInt < 7) {
+                    $(".uv").removeClass("good")
+                    $(".uv").addClass("moderate")
+                } else {
+                    $(".uv").removeClass("good")
+                    $(".uv").removeClass("moderate")
+                    $(".uv").addClass("bad")
+                }
             }
+            changeUVStatus()
         })
+
+
 
     }
