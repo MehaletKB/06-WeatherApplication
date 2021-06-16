@@ -27,6 +27,22 @@ ul {
     list-style-type: none;
 }
 
+.uv{
+    background-color: transparent;
+}
+
+.good{
+    background-color: rgba(0, 255, 0, 0.534)
+}
+
+.moderate {
+    background-color: rgba(244, 247, 65, 0.562);
+}
+
+.bad {
+    background-color: rgba(252, 8, 8, 0.562);
+}
+
 a {
     padding: 15px
 }

@@ -21,20 +21,18 @@ function getData(){
     .then(function(response){
         return response.json();
     })
-    .then (displayData);
-    // .catch(function(error){
-    //     console.log("Error:", error);
-    // });
+    .then(displayData);
 }
 
-function displayData(response) {
+function displayData(response){
     console.log(response);
         var location = document.querySelector(".searched-location");
         location.innerHTML = `${response.name}, ${response.sys.country}`;
 
-        var locationDate = new Date();
-        var date = document.querySelector(".searched-location-date");
-        date.innerHTML = getDate(locationDate);
+        var timeStamp = response.dt;
+        var dateTime = new Date(timeStamp * 1000);
+        var localDateTime = document.querySelector(".searched-location-date");
+        localDateTime.innerHTML = (dateTime.toUTCString())
 
         var temp = document.querySelector(".searched-location-temp");
         temp.innerHTML = `${Math.round(response.main.temp)}°`
@@ -43,7 +41,6 @@ function displayData(response) {
         var weatherIconURL = "http://openweathermap.org/img/w/";
         var weatherIconCode = response.weather[0].icon;
         weatherIcon.src = weatherIconURL + weatherIconCode + ".png";
-
 
         var description = document.querySelector(".searched-weather-description");
         description.innerHTML = `${response.weather[0].description}`
@@ -54,22 +51,21 @@ function displayData(response) {
         var windSpeed = document.querySelector("#searched-location-wind");
         windSpeed.innerHTML = `Wind Speed: ${response.wind.speed} MPH`
 
-        // var uvIndex = document.querySelector("#searched-location-uvIndex");
-        // uvIndex.innerHTML = `${}`
+        var longitude = response.coord.lon;
+        var latitude = response.coord.lat;
+
+        fetch(`${api.BASE_URL}onecall?lat=${latitude}&lon=${longitude}&appid=${api.key}`)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data)
+            var uvIndex = document.querySelector("#searched-location-uvIndex");
+            uvIndex.innerHTML = `${data.current.uvi}`
+            uvIndexInt = parseInt(uvIndex.innerHTML)
+            if(uvIndexInt > 3){
+                $("#searched-location-uvIndex").addClass("good")
+            }
+        })
 
     }
-
-function getDate(d) {
-    var months= ["January","February","March","April","May","June","July",
-    "August","September","October","November","December"];
-
-    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-    var day = days[d.getDay()];
-    var date = d.getDate();
-    var month= months[d.getMonth()];
-    var year = d.getFullYear();
-
-    return `${day}, ${date}, ${month}, ${year}`
-
-}
