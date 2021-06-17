@@ -43,16 +43,18 @@ ul {
     background-color: rgba(252, 8, 8, 0.562);
 }
 
-a {
-    padding: 15px;
-}
-
 h3 {
     margin-left: 25px;
 }
-.card-title {
-    padding: 20px;
-    border-radius: 10px;
+
+.each-day {
+    border-radius: 5px;
     background-color: royalblue;
     color: white
 }
+
+.dayOfWeek {
+    font-size: x-large;
+}
+
+

@@ -12,7 +12,6 @@ function getWeatherInfo(event){
     event.preventDefault();
     if(event){
         getCityData(search.value);
-        console.log(search.value);
     }
 }
 
@@ -26,7 +25,7 @@ function getCityData(){
 
 
 function getCityLocation(response){
-    console.log(response);
+    // console.log(response);
 
     // Set up response for invalid search
     if (response.cod === "404"){
@@ -91,7 +90,7 @@ function displayData(response){
     function changeUVStatus(){
         if(uvIndexInt < 3){
             $(".uv").addClass("good")
-        } else if(uvIndexInt > 3 && uvIndexInt < 7) {
+        } else if(uvIndexInt >= 3 && uvIndexInt < 7) {
             $(".uv").removeClass("good")
             $(".uv").addClass("moderate")
         } else if (uvIndexInt > 6) {
@@ -104,57 +103,45 @@ function displayData(response){
 
 
         function displayForecast(){
-            // var forecastElement = document.querySelector(".card-body");
             var forecastArray = response.daily
             console.log(forecastArray)
 
+            var forecastElement = document.querySelector(".daily-forecast")
+
             for(let i = 1; i < 6; i++){
+                var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
+                console.log(dailyDay)
+
+                var dailyIconCode = forecastArray[i].weather[0].icon;
+                var dailyIconURL = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
+                $(".daily-icon").attr("src", dailyIconURL)
+
                 var dailyTemp = forecastArray[i].temp.day;
-                console.log(dailyTemp)
+                var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(2)
+                console.log(dailyTemp_F)
 
                 var dailyWind = forecastArray[i].wind_speed;
                 console.log(dailyWind)
 
                 var dailyHumidity = forecastArray[i].humidity;
                 console.log(dailyHumidity)
+
+                var displayDailyForecast = `<h3> 5-Day Forecast: </h3>
+                                            <div class="each-day">
+                                                <ul>
+                                                    <li class="dayOfWeek" >${dailyDay}</li>
+                                                    <li>Temp: ${dailyTemp_F}</li>
+                                                    <img src="" class= "daily-icon">
+                                                    <li>Wind: ${dailyWind}</li>
+                                                    <li>Humidity: ${dailyHumidity}</li>
+                                                </ul>
+                                            </div>`
+
+                forecastElement.innerHTML = displayDailyForecast;
+
             }
             
-            
-
 
         }
         displayForecast()
-
-
-
-
-            // var forecastDay = "";
-            // console.log(forecastDay)
-            // response.daily.forEach((value, index) => {
-            //     if(index > 0){
-            //         var dayName = new Date(value.dt * 1000).toLocaleDateString("en", { weekday: "long",});
-            //         var dayIcon = value.weather[0].icon;
-            //         var dayTemp = value.temp.day.toFixed(0)
-            //         forecastDay = `<div class="forecast-day">
-            //         <p>${dayName}</p>
-            //         <p><span class="ico-${dayIcon}" title="${dayIcon}"></span></p>
-            //         <div class="forecast-day--temp">${dayTemp}<sup>°C</sup></div>
-            //         </div>`
-            //         forecastElement[0].insertAdjacentHTML('afterbegin', forecastDay)
-                }
-        //     })
-        // }
-        // displayForecast()
-
-
-
-    // function getDaily(data){
-    //     for (let i = 1; i <= 5; i++){
-    //         var dailyForcast = createDailyForecast(data.daily[i]);
-    //         getDaily(dailyForcast)
-    //     }
-    // }
-
-    // funtion createDailyForecast (){
-    //     var dayName = getDayName
-    // }
+}
