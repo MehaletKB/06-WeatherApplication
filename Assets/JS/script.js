@@ -54,7 +54,6 @@ function getCityLocation(response){
 }
 
 function displayData(response){
-    console.log(response);
 
     // Get time and date of searched location
     var timeStamp = response.current.dt;
@@ -110,32 +109,28 @@ function displayData(response){
 
             for(let i = 1; i < 6; i++){
                 var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
-                console.log(dailyDay)
 
                 var dailyIconCode = forecastArray[i].weather[0].icon;
                 var dailyIconURL = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
-                $(".daily-icon").attr("src", dailyIconURL)
 
                 var dailyTemp = forecastArray[i].temp.day;
-                var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(2)
-                console.log(dailyTemp_F)
+                var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(0)
 
                 var dailyWind = forecastArray[i].wind_speed;
-                console.log(dailyWind)
 
                 var dailyHumidity = forecastArray[i].humidity;
-                console.log(dailyHumidity)
 
-                var displayDailyForecast = `<h3> 5-Day Forecast: </h3>
-                                            <div class="each-day">
-                                                <ul>
-                                                    <li class="dayOfWeek" >${dailyDay}</li>
-                                                    <li>Temp: ${dailyTemp_F}</li>
-                                                    <img src="" class= "daily-icon">
-                                                    <li>Wind: ${dailyWind}</li>
-                                                    <li>Humidity: ${dailyHumidity}</li>
-                                                </ul>
-                                            </div>`
+                var displayDailyForecast = 
+                    `<h3> 5-Day Forecast: </h3>
+                        <div class="each-day">
+                            <ul>
+                                <li class="dayOfWeek" >${dailyDay}</li>
+                                <li>Temp: ${dailyTemp_F} °F</li>
+                                <img src="${dailyIconURL}" class= "daily-icon">
+                                <li>Wind: ${dailyWind} MPH</li>
+                                <li>Humidity: ${dailyHumidity}%</li>
+                            </ul>
+                        </div>`
 
                 forecastElement.innerHTML = displayDailyForecast;
 
