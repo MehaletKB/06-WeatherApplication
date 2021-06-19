@@ -121,7 +121,7 @@ function displayData(response){
                 var dailyHumidity = forecastArray[i].humidity;
 
                 var displayDailyForecast = 
-                        `<div class=" card each-day">
+                        `<div class="card each-day">
                             <ul>
                                 <li class="dayOfWeek" >${dailyDay}</li>
                                 <li>Temp: ${dailyTemp_F} °F</li>
@@ -131,7 +131,7 @@ function displayData(response){
                             </ul>
                         </div>`
 
-                forecastElement.innerHTML = displayDailyForecast;
+                forecastElement.append(displayDailyForecast);
 
                 console.log(displayDailyForecast)
             }
