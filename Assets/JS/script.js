@@ -114,15 +114,14 @@ function displayData(response){
                 var dailyIconURL = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
 
                 var dailyTemp = forecastArray[i].temp.day;
-                var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(0)
+                var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(0);
 
                 var dailyWind = forecastArray[i].wind_speed;
 
                 var dailyHumidity = forecastArray[i].humidity;
 
                 var displayDailyForecast = 
-                    `<h3> 5-Day Forecast: </h3>
-                        <div class="each-day">
+                        `<div class=" card each-day">
                             <ul>
                                 <li class="dayOfWeek" >${dailyDay}</li>
                                 <li>Temp: ${dailyTemp_F} °F</li>
@@ -134,9 +133,9 @@ function displayData(response){
 
                 forecastElement.innerHTML = displayDailyForecast;
 
+                console.log(displayDailyForecast)
             }
             
-
         }
         displayForecast()
 }
