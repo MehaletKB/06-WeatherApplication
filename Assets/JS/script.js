@@ -108,10 +108,10 @@ function displayData(response){
             var forecastElement = document.querySelector(".daily-forecast")
 
             for(let i = 1; i < 6; i++){
-                var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
-
                 var dailyIconCode = forecastArray[i].weather[0].icon;
                 var dailyIconURL = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
+
+                var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
 
                 var dailyTemp = forecastArray[i].temp.day;
                 var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(0);
@@ -124,8 +124,8 @@ function displayData(response){
                         `<div class="card each-day">
                             <ul>
                                 <li class="dayOfWeek" >${dailyDay}</li>
-                                <li>Temp: ${dailyTemp_F} °F</li>
                                 <img src="${dailyIconURL}" class= "daily-icon">
+                                <li>Temp: ${dailyTemp_F} °F</li>
                                 <li>Wind: ${dailyWind} MPH</li>
                                 <li>Humidity: ${dailyHumidity}%</li>
                             </ul>
