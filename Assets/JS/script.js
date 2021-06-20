@@ -130,8 +130,9 @@ function displayData(response){
                                 <li>Humidity: ${dailyHumidity}%</li>
                             </ul>
                         </div>`
+                forecastElement.innerHTML += displayDailyForecast
 
-                forecastElement.append(displayDailyForecast);
+                // forecastElement.append(displayDailyForecast);
 
                 console.log(displayDailyForecast)
             }
