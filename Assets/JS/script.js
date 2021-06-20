@@ -139,4 +139,5 @@ function displayData(response){
             
         }
         displayForecast()
+        search.value = ""
 }
