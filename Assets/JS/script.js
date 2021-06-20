@@ -50,7 +50,7 @@ function getCityLocation(response){
     .then(function(response){
         return response.json();
     })
-    .then(displayData)
+    .then(displayData);
 }
 
 function displayData(response){
@@ -98,20 +98,20 @@ function displayData(response){
             $(".uv").addClass("bad")
             }
         }        
-        changeUVStatus()
+        changeUVStatus();
 
 
         function displayForecast(){
-            var forecastArray = response.daily
-            console.log(forecastArray)
-
-            var forecastElement = document.querySelector(".daily-forecast")
-
+            var forecastArray = response.daily;
+            
+            var forecastElement = document.querySelector(".daily-forecast");
+            forecastElement.innerHTML= "";
+            
             for(let i = 1; i < 6; i++){
+                var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
+
                 var dailyIconCode = forecastArray[i].weather[0].icon;
                 var dailyIconURL = "http://openweathermap.org/img/w/" + dailyIconCode + ".png";
-
-                var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
 
                 var dailyTemp = forecastArray[i].temp.day;
                 var dailyTemp_F = (((dailyTemp - 273.15) *1.8) + 32).toFixed(0);
@@ -125,19 +125,15 @@ function displayData(response){
                             <ul>
                                 <li class="dayOfWeek" >${dailyDay}</li>
                                 <img src="${dailyIconURL}" class= "daily-icon">
-                                <li>Temp: ${dailyTemp_F} °F</li>
+                                <li>Temp: ${dailyTemp_F}°F</li>
                                 <li>Wind: ${dailyWind} MPH</li>
                                 <li>Humidity: ${dailyHumidity}%</li>
                             </ul>
-                        </div>`
-                forecastElement.innerHTML += displayDailyForecast
-
-                // forecastElement.append(displayDailyForecast);
-
-                console.log(displayDailyForecast)
+                        </div>`;
+                forecastElement.innerHTML += displayDailyForecast;
             }
-            
         }
-        displayForecast()
-        search.value = ""
+
+        displayForecast();
+        search.value = "";
 }

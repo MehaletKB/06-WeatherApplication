@@ -57,4 +57,7 @@ h3 {
     font-size: x-large;
 }
 
-
+/* #store-title{
+    text-orientation: sideways-right;
+    writing-mode: sideways-lr;
+} */
