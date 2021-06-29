@@ -15,9 +15,9 @@
             <h1 class="display-4">Weather Dashboard</h1>
 
             <div class="container">
-                <form class= "search-form" id="search-form">
+                <form class="search-form" id="search-form">
                     <label for="search-text">Enter Location</label>
-                    <input class="search-text" id="search-text" type="text" placeholder="City">
+                    <input class="search-text" name="search-text" id="search-text" type="text" placeholder="City"/>
                     <button class="search-button"><i class="fas fa-search"></i></button>
                 </form>
                 
@@ -27,7 +27,7 @@
                     <h5 class="searched-location"></h5>
                     <h6 class="searched-location-date"></h6>
 
-                    <img src= "./Assets/Images/White-Square.jpg" class="weather-icon" alt="weather icon" width="100">
+                    <img src= "./Assets/Images/White-Square.jpg" class="weather-icon" alt="weather icon" width="100"/>
 
                     <h2 class="searched-location-temp"></h2>
 
@@ -38,17 +38,21 @@
                         <li id="searched-location-wind">Wind Speed:</li>
                         <li class="uv">UV index: <span  id="searched-location-uvIndex"></span></li>
                     </ul>
-                    
-                    <!-- <a href="#" class="card-link">Save Location</a> -->
+
                 </div>
             </div>    
-            <!-- <aside>hi</aside> -->
         </div>
 
 
         <div class="card-deck row">
-            <div class=" row daily-forecast">
+            <div class=" row daily-forecast col-lg-10"></div>
+            <div id="saved-locations">
+                <h5>Recent Searches</h5>
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action" id= "searched-city-btn" aria-current="true">
+                    </button>
 
+                </div>      
             </div>
 
         </div>
@@ -56,9 +60,9 @@
 
     </main>
     
-    <script src="./Assets/JS/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="./Assets/JS/script.js"></script>
     
 </body>
 </html>

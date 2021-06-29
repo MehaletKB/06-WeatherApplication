@@ -3,15 +3,18 @@ const api = {
     BASE_URL: "https://api.openweathermap.org/data/2.5/"
 }
 
-const search = document.querySelector(".search-text");
-const button = document.querySelector(".search-button");
+var search = document.querySelector(".search-text");
+const searchButton = document.querySelector(".search-button");
 
-button.addEventListener("click", getWeatherInfo);
+searchButton.addEventListener("click", getWeatherInfo);
+
+const searchedCitiesArray = [];
 
 function getWeatherInfo(event){
     event.preventDefault();
     if(event){
         getCityData(search.value);
+        saveLocation(search.value)
     }
 }
 
@@ -50,7 +53,7 @@ function getCityLocation(response){
     .then(function(response){
         return response.json();
     })
-    .then(displayData);
+    .then(displayData)
 }
 
 function displayData(response){
@@ -102,11 +105,14 @@ function displayData(response){
 
 
         function displayForecast(){
+            // Create array from response data
             var forecastArray = response.daily;
             
+            // Display 5 day forecast
             var forecastElement = document.querySelector(".daily-forecast");
             forecastElement.innerHTML= "";
-            
+
+            // Loop through forecast array starting from day after current day and pick out needed data
             for(let i = 1; i < 6; i++){
                 var dailyDay= new Date(forecastArray[i].dt * 1000).toDateString();
 
@@ -120,6 +126,7 @@ function displayData(response){
 
                 var dailyHumidity = forecastArray[i].humidity;
 
+                // Use template literals to display forecast
                 var displayDailyForecast = 
                         `<div class="card each-day">
                             <ul>
@@ -136,4 +143,29 @@ function displayData(response){
 
         displayForecast();
         search.value = "";
+}
+
+const searchedCities = document.querySelector("#searched-city-btn")
+searchedCities.addEventListener("click", getSavedLocationData)
+
+function saveLocation(){
+    searchedCitiesArray.push(search.value)
+    // console.log(searchedCitiesArray)
+    localStorage.setItem("saved-location", JSON.stringify(searchedCitiesArray))
+    var savedLocation=
+    `<button type="button" class="list-group-item list-group-item-action" id= "searched-city-btn" aria-current="true">${search.value}
+    </button>`;
+    searchedCities.innerHTML += savedLocation;
+}
+
+
+
+function getSavedLocationData(event){
+    event.preventDefault
+    
+    // searchedCitiesArray.forEach(displayLocationData)
+
+    // function displayLocationData(){
+       
+    // }
 }
